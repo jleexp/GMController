@@ -26,7 +26,7 @@ namespace GMController
             decimal move = ((decimal)100 + (decimal)Rnd.Next(99)) / (decimal)1000000;
             if (checkBox1.Checked == true)
             {
-                //move = move * 2;
+                move = move * 2;
             }
             lat += move;
             textBox1.Text = lat.ToString();
@@ -40,7 +40,7 @@ namespace GMController
             decimal move = ((decimal)100 + (decimal)Rnd.Next(99)) / (decimal)1000000;
             if (checkBox1.Checked == true)
             {
-                //move = move * 2;
+                move = move * 2;
             }
             lat -= move;
             textBox1.Text = lat.ToString();
@@ -54,7 +54,7 @@ namespace GMController
             decimal move = ((decimal)100 + (decimal)Rnd.Next(99)) / (decimal)1000000;
             if (checkBox1.Checked == true)
             {
-                //move = move * 2;
+                move = move * 2;
             }
             lng += move;
             textBox2.Text = lng.ToString();
@@ -68,7 +68,7 @@ namespace GMController
             decimal move = ((decimal)100 + (decimal)Rnd.Next(99)) / (decimal)1000000;
             if (checkBox1.Checked == true)
             {
-                //move = move * 2;
+                move = move * 2;
             }
             lng -= move;
             textBox2.Text = lng.ToString();
@@ -242,6 +242,46 @@ namespace GMController
                     //指南宮大雄寶殿
                     textBox1.Text = "24.978565";
                     textBox2.Text = "121.586923";
+                    break;
+                case 20:
+                    //兩隻小鹿
+                    textBox1.Text = "24.971323";
+                    textBox2.Text = "121.567771";
+                    break;
+                case 21:
+                    //樟湖步道
+                    textBox1.Text = "24.965303";
+                    textBox2.Text = "121.581481";
+                    break;
+                case 22:
+                    //喵嗚
+                    textBox1.Text = "24.967299";
+                    textBox2.Text = "121.587170";
+                    break;
+                case 23:
+                    //貓空纜車站
+                    textBox1.Text = "24.968294";
+                    textBox2.Text = "121.587819";
+                    break;
+                case 24:
+                    //路標
+                    textBox1.Text = "24.966704";
+                    textBox2.Text = "121.589388";
+                    break;
+                case 25:
+                    //茶研發推廣中心*2
+                    textBox1.Text = "24.969249";
+                    textBox2.Text = "121.594096";
+                    break;
+                case 26:
+                    //銀河洞*2
+                    textBox1.Text = "24.958323";
+                    textBox2.Text = "121.583281";
+                    break;
+                case 27:
+                    //靈山媽祖廟*2
+                    textBox1.Text = "24.958871";
+                    textBox2.Text = "121.580869";
                     break;
                 default:
                     break;
@@ -461,6 +501,46 @@ namespace GMController
                     //指南宮大雄寶殿
                     textBox4.Text = "24.978565";
                     textBox5.Text = "121.586923";
+                    break;
+                case 20:
+                    //兩隻小鹿
+                    textBox4.Text = "24.971323";
+                    textBox5.Text = "121.567771";
+                    break;
+                case 21:
+                    //樟湖步道
+                    textBox4.Text = "24.965303";
+                    textBox5.Text = "121.581481";
+                    break;
+                case 22:
+                    //喵嗚
+                    textBox4.Text = "24.967299";
+                    textBox5.Text = "121.587170";
+                    break;
+                case 23:
+                    //貓空纜車站
+                    textBox4.Text = "24.968294";
+                    textBox5.Text = "121.587819";
+                    break;
+                case 24:
+                    //路標
+                    textBox4.Text = "24.966704";
+                    textBox5.Text = "121.589388";
+                    break;
+                case 25:
+                    //茶研發推廣中心*2
+                    textBox4.Text = "24.969249";
+                    textBox5.Text = "121.594096";
+                    break;
+                case 26:
+                    //銀河洞*2
+                    textBox4.Text = "24.958323";
+                    textBox5.Text = "121.583281";
+                    break;
+                case 27:
+                    //靈山媽祖廟*2
+                    textBox4.Text = "24.958871";
+                    textBox5.Text = "121.580869";
                     break;
                 default:
                     break;
