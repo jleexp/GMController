@@ -178,7 +178,9 @@
             "道館-路標",
             "道館-茶研發推廣中心*2",
             "道館-銀河洞*2",
-            "道館-靈山媽祖廟*2"});
+            "道館-靈山媽祖廟*2",
+            "道館-福德宮",
+            "道館-銀河土地公"});
             this.comboBox1.Location = new System.Drawing.Point(158, 20);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(125, 20);
@@ -328,7 +330,9 @@
             "道館-路標",
             "道館-茶研發推廣中心*2",
             "道館-銀河洞*2",
-            "道館-靈山媽祖廟*2"});
+            "道館-靈山媽祖廟*2",
+            "道館-福德宮",
+            "道館-銀河土地公"});
             this.comboBox2.Location = new System.Drawing.Point(159, 105);
             this.comboBox2.Name = "comboBox2";
             this.comboBox2.Size = new System.Drawing.Size(125, 20);

@@ -165,8 +165,8 @@ namespace GMController
                     break;
                 case 4:
                     //大湖公園
-                    textBox1.Text = "25.083767";
-                    textBox2.Text = "121.602133";
+                    textBox1.Text = "25.083320";
+                    textBox2.Text = "121.601942";
                     break;
                 case 5:
                     //逢甲公園
@@ -282,6 +282,16 @@ namespace GMController
                     //靈山媽祖廟*2
                     textBox1.Text = "24.958871";
                     textBox2.Text = "121.580869";
+                    break;
+                case 28:
+                    //福德宮
+                    textBox1.Text = "24.978328";
+                    textBox2.Text = "121.563430";
+                    break;
+                case 29:
+                    //銀河土地公
+                    textBox1.Text = "24.956907";
+                    textBox2.Text = "121.575389";
                     break;
                 default:
                     break;
@@ -424,8 +434,8 @@ namespace GMController
                     break;
                 case 4:
                     //大湖公園
-                    textBox4.Text = "25.083767";
-                    textBox5.Text = "121.602133";
+                    textBox4.Text = "25.083320";
+                    textBox5.Text = "121.601942";
                     break;
                 case 5:
                     //逢甲公園
@@ -541,6 +551,16 @@ namespace GMController
                     //靈山媽祖廟*2
                     textBox4.Text = "24.958871";
                     textBox5.Text = "121.580869";
+                    break;
+                case 28:
+                    //福德宮
+                    textBox4.Text = "24.978328";
+                    textBox5.Text = "121.563430";
+                    break;
+                case 29:
+                    //銀河土地公
+                    textBox4.Text = "24.956907";
+                    textBox5.Text = "121.575389";
                     break;
                 default:
                     break;
