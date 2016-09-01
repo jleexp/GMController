@@ -15,6 +15,8 @@ namespace GMController
     {
         Random Rnd = new Random();
         string GMShell = @"C:\Program Files\Genymobile\Genymotion\genyshell";
+        decimal latSelected;
+        decimal lngSelected;
         public Form1()
         {
             InitializeComponent();
@@ -78,31 +80,29 @@ namespace GMController
         private void BtnNorth_Click(object sender, EventArgs e)
         {
             MoveNorth();
-            textBox3.Text = "Move N done.";
+            //textBox3.Text = "Move N done.";
         }
 
         private void BtnWest_Click(object sender, EventArgs e)
         {
             MoveWest();
-            textBox3.Text = "Move W done.";
+            //textBox3.Text = "Move W done.";
         }
 
         private void BtnSouth_Click(object sender, EventArgs e)
         {
             MoveSouth();
-            textBox3.Text = "Move S done.";
+            //textBox3.Text = "Move S done.";
         }
 
         private void BtnEast_Click(object sender, EventArgs e)
         {
             MoveEast();
-            textBox3.Text = "Move E done.";
+            //textBox3.Text = "Move E done.";
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            textBox1.Text = "25.136257";
-            textBox2.Text = "121.506297";
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -112,20 +112,34 @@ namespace GMController
             {
                 File.Delete(logFile);
             }
-            string arg = "-c \"gps setstatus enabled\"";
-            RunGMShell(arg);
-            arg = "-c \"gps setlatitude " + textBox1.Text + "\"";
-            RunGMShell(arg);
-            arg = "-c \"gps setlongitude " + textBox2.Text + "\"";
-            RunGMShell(arg);
-            arg = "-c \"gps setaccuracy 20\"";
-            RunGMShell(arg);
-            textBox3.Text = "初始化定位完成";
+            if (string.IsNullOrEmpty(textBox1.Text) || string.IsNullOrEmpty(textBox2.Text))
+            {
+                //MessageBox.Show("請先定位座標!");
+                textBox3.Text = "請先定位座標!";
+            }
+            else if (checkBox2.Checked == true)
+            {
+                //MessageBox.Show("已鎖定, 請先解除!");
+                textBox3.Text = "已鎖定, 請先解除!";
+            }
+            else
+            {
+                string arg = "-c \"gps setstatus enabled\"";
+                RunGMShell(arg);
+                arg = "-c \"gps setlatitude " + textBox1.Text + "\"";
+                RunGMShell(arg);
+                arg = "-c \"gps setlongitude " + textBox2.Text + "\"";
+                RunGMShell(arg);
+                arg = "-c \"gps setaccuracy 20\"";
+                RunGMShell(arg);
+                checkBox2.Checked = true;
+                textBox3.Text = "初始化定位完成";
+            }
         }
 
         private void RunGMShell(string arg)
         {
-            textBox3.Text = "";
+            //textBox3.Text = "";
             ProcessStartInfo pinfo = new ProcessStartInfo();
             pinfo.FileName = GMShell;
             pinfo.Arguments = arg;
@@ -136,7 +150,7 @@ namespace GMController
             p.EnableRaisingEvents = true;
             p.Start();
             p.WaitForExit();
-            textBox3.Text = arg;
+            //textBox3.Text = arg;
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -145,153 +159,188 @@ namespace GMController
             {
                 case 2:
                     //北投公園
-                    textBox1.Text = "25.136257";
-                    textBox2.Text = "121.506297";
+                    latSelected = (decimal)25.136257;
+                    lngSelected = (decimal)121.506297;
                     break;
                 case 1:
                     //政大
-                    textBox1.Text = "24.986457";
-                    textBox2.Text = "121.574303";
+                    latSelected = (decimal)24.986457;
+                    lngSelected = (decimal)121.574303;
                     break;
                 case 0:
                     //我家
-                    textBox1.Text = "24.990560";
-                    textBox2.Text = "121.576179";
+                    latSelected = (decimal)24.990560;
+                    lngSelected = (decimal)121.576179;
                     break;
                 case 3:
                     //碧湖公園
-                    textBox1.Text = "25.082187";
-                    textBox2.Text = "121.585623";
+                    latSelected = (decimal)25.082187;
+                    lngSelected = (decimal)121.585623;
                     break;
                 case 4:
                     //大湖公園
-                    textBox1.Text = "25.083320";
-                    textBox2.Text = "121.601942";
+                    latSelected = (decimal)25.083320;
+                    lngSelected = (decimal)121.601942;
                     break;
                 case 5:
                     //逢甲公園
-                    textBox1.Text = "24.176785";
-                    textBox2.Text = "120.640227";
+                    latSelected = (decimal)24.176785;
+                    lngSelected = (decimal)120.640227;
                     break;
                 case 6:
                     //前港公園
-                    textBox1.Text = "25.084933";
-                    textBox2.Text = "121.520553";
+                    latSelected = (decimal)25.084933;
+                    lngSelected = (decimal)121.520553;
                     break;
                 case 7:
-                    //梧棲漁港
-                    textBox1.Text = "24.293521";
-                    textBox2.Text = "120.521296";
+                    //青年公園
+                    latSelected = (decimal)25.025426;
+                    lngSelected = (decimal)121.506716;
                     break;
                 case 8:
                     //南寮漁港
-                    textBox1.Text = "24.849308";
-                    textBox2.Text = "120.928755";
+                    latSelected = (decimal)24.849308;
+                    lngSelected = (decimal)120.928755;
                     break;
                 case 9:
                     //信義區
-                    textBox1.Text = "25.036400";
-                    textBox2.Text = "121.567165";
+                    latSelected = (decimal)25.036400;
+                    lngSelected = (decimal)121.567165;
                     break;
                 case 10:
                     //杏花林
-                    textBox1.Text = "24.969199";
-                    textBox2.Text = "121.576663";
+                    latSelected = (decimal)24.969199;
+                    lngSelected = (decimal)121.576663;
                     break;
                 case 11:
                     //OVERLOOK DECK
-                    textBox4.Text = "24.970347";
-                    textBox5.Text = "121.577785";
+                    latSelected = (decimal)24.970347;
+                    lngSelected = (decimal)121.577785;
                     break;
                 case 12:
                     //神奇大石龜
-                    textBox1.Text = "24.974221";
-                    textBox2.Text = "121.574857";
+                    latSelected = (decimal)24.974221;
+                    lngSelected = (decimal)121.574857;
                     break;
                 case 13:
                     //聖恩宮
-                    textBox1.Text = "24.973455";
-                    textBox2.Text = "121.569619";
+                    latSelected = (decimal)24.973455;
+                    lngSelected = (decimal)121.569619;
                     break;
                 case 14:
                     //政大研究總中心
-                    textBox1.Text = "24.979015";
-                    textBox2.Text = "121.575183";
+                    latSelected = (decimal)24.979015;
+                    lngSelected = (decimal)121.575183;
                     break;
                 case 15:
                     //指南茶路石碑
-                    textBox1.Text = "24.979015";
-                    textBox2.Text = "121.577195";
+                    latSelected = (decimal)24.979015;
+                    lngSelected = (decimal)121.577195;
                     break;
                 case 16:
                     //親水文學步道
-                    textBox1.Text = "24.985321";
-                    textBox2.Text = "121.580413";
+                    latSelected = (decimal)24.985321;
+                    lngSelected = (decimal)121.580413;
                     break;
                 case 17:
                     //指南宮天門長廊
-                    textBox1.Text = "24.980339";
-                    textBox2.Text = "121.587169";
+                    latSelected = (decimal)24.980339;
+                    lngSelected = (decimal)121.587169;
                     break;
                 case 18:
                     //指南宮纜車站
-                    textBox1.Text = "24.979023";
-                    textBox2.Text = "121.589893";
+                    latSelected = (decimal)24.979023;
+                    lngSelected = (decimal)121.589893;
                     break;
                 case 19:
                     //指南宮大雄寶殿
-                    textBox1.Text = "24.978565";
-                    textBox2.Text = "121.586923";
+                    latSelected = (decimal)24.978565;
+                    lngSelected = (decimal)121.586923;
                     break;
                 case 20:
                     //兩隻小鹿
-                    textBox1.Text = "24.971323";
-                    textBox2.Text = "121.567771";
+                    latSelected = (decimal)24.971323;
+                    lngSelected = (decimal)121.567771;
                     break;
                 case 21:
                     //樟湖步道
-                    textBox1.Text = "24.965303";
-                    textBox2.Text = "121.581481";
+                    latSelected = (decimal)24.965303;
+                    lngSelected = (decimal)121.581481;
                     break;
                 case 22:
                     //喵嗚
-                    textBox1.Text = "24.967299";
-                    textBox2.Text = "121.587170";
+                    latSelected = (decimal)24.967299;
+                    lngSelected = (decimal)121.587170;
                     break;
                 case 23:
                     //貓空纜車站
-                    textBox1.Text = "24.968294";
-                    textBox2.Text = "121.587819";
+                    latSelected = (decimal)24.968294;
+                    lngSelected = (decimal)121.587819;
                     break;
                 case 24:
                     //路標
-                    textBox1.Text = "24.966704";
-                    textBox2.Text = "121.589388";
+                    latSelected = (decimal)24.966704;
+                    lngSelected = (decimal)121.589388;
                     break;
                 case 25:
                     //茶研發推廣中心*2
-                    textBox1.Text = "24.969249";
-                    textBox2.Text = "121.594096";
+                    latSelected = (decimal)24.969249;
+                    lngSelected = (decimal)121.594096;
                     break;
                 case 26:
                     //銀河洞*2
-                    textBox1.Text = "24.958323";
-                    textBox2.Text = "121.583281";
+                    latSelected = (decimal)24.958323;
+                    lngSelected = (decimal)121.583281;
                     break;
                 case 27:
                     //靈山媽祖廟*2
-                    textBox1.Text = "24.958871";
-                    textBox2.Text = "121.580869";
+                    latSelected = (decimal)24.958871;
+                    lngSelected = (decimal)121.580869;
                     break;
                 case 28:
                     //福德宮
-                    textBox1.Text = "24.978328";
-                    textBox2.Text = "121.563430";
+                    latSelected = (decimal)24.978328;
+                    lngSelected = (decimal)121.563430;
                     break;
                 case 29:
                     //銀河土地公
-                    textBox1.Text = "24.956907";
-                    textBox2.Text = "121.575389";
+                    latSelected = (decimal)24.956907;
+                    lngSelected = (decimal)121.575389;
+                    break;
+                case 30:
+                    //儒釋道
+                    latSelected = (decimal)24.972672;
+                    lngSelected = (decimal)121.598248;
+                    break;
+                case 31:
+                    //茗華園牌樓
+                    latSelected = (decimal)24.970426;
+                    lngSelected = (decimal)121.601473;
+                    break;
+                case 32:
+                    //福德宮天公爐
+                    latSelected = (decimal)24.970275;
+                    lngSelected = (decimal)121.606985;
+                    break;
+                case 33:
+                    //濟公禪師開示
+                    latSelected = (decimal)24.978199;
+                    lngSelected = (decimal)121.597492;
+                    break;
+                case 34:
+                    //廣恩獅
+                    latSelected = (decimal)24.955585;
+                    lngSelected = (decimal)121.565262;
+                    break;
+                case 35:
+                    //竹雲寺
+                    latSelected = (decimal)24.949740;
+                    lngSelected = (decimal)121.567416;
+                    break;
+                case 36:
+                    //六份仔福德宮
+                    latSelected = (decimal)24.950554;
+                    lngSelected = (decimal)121.584998;
                     break;
                 default:
                     break;
@@ -302,28 +351,28 @@ namespace GMController
         {
             MoveNorth();
             MoveWest();
-            textBox3.Text = "Move NW done.";
+            //textBox3.Text = "Move NW done.";
         }
 
         private void BtnNE_Click(object sender, EventArgs e)
         {
             MoveNorth();
             MoveEast();
-            textBox3.Text = "Move NE done.";
+            //textBox3.Text = "Move NE done.";
         }
 
         private void BtnSE_Click(object sender, EventArgs e)
         {
             MoveSouth();
             MoveEast();
-            textBox3.Text = "Move SE done.";
+            //textBox3.Text = "Move SE done.";
         }
 
         private void BtnSW_Click(object sender, EventArgs e)
         {
             MoveSouth();
             MoveWest();
-            textBox3.Text = "Move SW done.";
+            //textBox3.Text = "Move SW done.";
         }
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
@@ -370,14 +419,8 @@ namespace GMController
                         MoveWest();
                     }
                 }
-                if (checkBox1.Checked == true)
-                {
-                    System.Threading.Thread.Sleep(1000);
-                }
-                else
-                {
-                    System.Threading.Thread.Sleep(4000);
-                }
+                int SleepTime = Convert.ToInt16(comboBox2.SelectedIndex) * 1000;
+                System.Threading.Thread.Sleep(SleepTime);
             } while ((Math.Abs(diff_lat) > diff_max || Math.Abs(diff_lng) > diff_max) && backgroundWorker1.CancellationPending == false);
         }
 
@@ -406,165 +449,45 @@ namespace GMController
                 BtnAuto.Text = "Start";
                 backgroundWorker1.CancelAsync();
             }
+            textBox3.Text = "";
         }
 
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
-            switch (comboBox2.SelectedIndex)
+        }
+
+        private void Set1Btn_Click(object sender, EventArgs e)
+        {
+            if (comboBox1.SelectedIndex == -1)
             {
-                case 2:
-                    //北投公園
-                    textBox4.Text = "25.136257";
-                    textBox5.Text = "121.506297";
-                    break;
-                case 1:
-                    //政大
-                    textBox4.Text = "24.986457";
-                    textBox5.Text = "121.574303";
-                    break;
-                case 0:
-                    //我家
-                    textBox4.Text = "24.990560";
-                    textBox5.Text = "121.576179";
-                    break;
-                case 3:
-                    //碧湖公園
-                    textBox4.Text = "25.082187";
-                    textBox5.Text = "121.585623";
-                    break;
-                case 4:
-                    //大湖公園
-                    textBox4.Text = "25.083320";
-                    textBox5.Text = "121.601942";
-                    break;
-                case 5:
-                    //逢甲公園
-                    textBox4.Text = "24.176785";
-                    textBox5.Text = "120.640227";
-                    break;
-                case 6:
-                    //前港公園
-                    textBox4.Text = "25.084933";
-                    textBox5.Text = "121.520553";
-                    break;
-                case 7:
-                    //梧棲漁港
-                    textBox4.Text = "24.293521";
-                    textBox5.Text = "120.521296";
-                    break;
-                case 8:
-                    //南寮漁港
-                    textBox4.Text = "24.849308";
-                    textBox5.Text = "120.928755";
-                    break;
-                case 9:
-                    //信義區
-                    textBox4.Text = "25.036400";
-                    textBox5.Text = "121.567165";
-                    break;
-                case 10:
-                    //杏花林
-                    textBox4.Text = "24.969199";
-                    textBox5.Text = "121.576663";
-                    break;
-                case 11:
-                    //OVERLOOK DECK
-                    textBox4.Text = "24.970347";
-                    textBox5.Text = "121.577785";
-                    break;
-                case 12:
-                    //神奇大石龜
-                    textBox4.Text = "24.974221";
-                    textBox5.Text = "121.574857";
-                    break;
-                case 13:
-                    //聖恩宮
-                    textBox4.Text = "24.973455";
-                    textBox5.Text = "121.569619";
-                    break;
-                case 14:
-                    //政大研究總中心
-                    textBox4.Text = "24.979015";
-                    textBox5.Text = "121.575183";
-                    break;
-                case 15:
-                    //指南茶路石碑
-                    textBox4.Text = "24.979015";
-                    textBox5.Text = "121.577195";
-                    break;
-                case 16:
-                    //親水文學步道
-                    textBox4.Text = "24.985321";
-                    textBox5.Text = "121.580413";
-                    break;
-                case 17:
-                    //指南宮天門長廊
-                    textBox4.Text = "24.980339";
-                    textBox5.Text = "121.587169";
-                    break;
-                case 18:
-                    //指南宮纜車站
-                    textBox4.Text = "24.979023";
-                    textBox5.Text = "121.589893";
-                    break;
-                case 19:
-                    //指南宮大雄寶殿
-                    textBox4.Text = "24.978565";
-                    textBox5.Text = "121.586923";
-                    break;
-                case 20:
-                    //兩隻小鹿
-                    textBox4.Text = "24.971323";
-                    textBox5.Text = "121.567771";
-                    break;
-                case 21:
-                    //樟湖步道
-                    textBox4.Text = "24.965303";
-                    textBox5.Text = "121.581481";
-                    break;
-                case 22:
-                    //喵嗚
-                    textBox4.Text = "24.967299";
-                    textBox5.Text = "121.587170";
-                    break;
-                case 23:
-                    //貓空纜車站
-                    textBox4.Text = "24.968294";
-                    textBox5.Text = "121.587819";
-                    break;
-                case 24:
-                    //路標
-                    textBox4.Text = "24.966704";
-                    textBox5.Text = "121.589388";
-                    break;
-                case 25:
-                    //茶研發推廣中心*2
-                    textBox4.Text = "24.969249";
-                    textBox5.Text = "121.594096";
-                    break;
-                case 26:
-                    //銀河洞*2
-                    textBox4.Text = "24.958323";
-                    textBox5.Text = "121.583281";
-                    break;
-                case 27:
-                    //靈山媽祖廟*2
-                    textBox4.Text = "24.958871";
-                    textBox5.Text = "121.580869";
-                    break;
-                case 28:
-                    //福德宮
-                    textBox4.Text = "24.978328";
-                    textBox5.Text = "121.563430";
-                    break;
-                case 29:
-                    //銀河土地公
-                    textBox4.Text = "24.956907";
-                    textBox5.Text = "121.575389";
-                    break;
-                default:
-                    break;
+                //MessageBox.Show("請先選擇地點!");
+                textBox3.Text = "請先選擇地點!";
             }
+            else
+            {
+                textBox1.Text = latSelected.ToString();
+                textBox2.Text = lngSelected.ToString();
+            }
+        }
+
+        private void Set2Btn_Click(object sender, EventArgs e)
+        {
+            if (comboBox1.SelectedIndex == -1)
+            {
+                //MessageBox.Show("請先選擇地點!");
+                textBox3.Text = "請先選擇地點!";
+            }
+            else
+            {
+                textBox4.Text = latSelected.ToString();
+                textBox5.Text = lngSelected.ToString();
+            }
+        }
+
+        private void Form1_Shown(object sender, EventArgs e)
+        {
+            checkBox1.Checked = true;
+            comboBox2.SelectedIndex = 2;
         }
     }
 }
