@@ -342,6 +342,51 @@ namespace GMController
                     latSelected = (decimal)24.950554;
                     lngSelected = (decimal)121.584998;
                     break;
+                case 37:
+                    //筆架山二格山路牌
+                    latSelected = (decimal)24.969655;
+                    lngSelected = (decimal)121.620569;
+                    break;
+                case 38:
+                    //蔣公騎馬雕像
+                    latSelected = (decimal)24.980059;
+                    lngSelected = (decimal)121.569471;
+                    break;
+                case 39:
+                    //大香山慈音巌
+                    latSelected = (decimal)24.961442;
+                    lngSelected = (decimal)121.560163;
+                    break;
+                case 40:
+                    //被囚禁的變電箱
+                    latSelected = (decimal)24.954271;
+                    lngSelected = (decimal)121.559148;
+                    break;
+                case 41:
+                    //新店福澤宮
+                    latSelected = (decimal)24.953836;
+                    lngSelected = (decimal)121.554643;
+                    break;
+                case 42:
+                    //青潭竹林路口
+                    latSelected = (decimal)24.951671;
+                    lngSelected = (decimal)121.550707;
+                    break;
+                case 43:
+                    //新店神召會
+                    latSelected = (decimal)24.951537;
+                    lngSelected = (decimal)121.547355;
+                    break;
+                case 44:
+                    //喜如意餐廳
+                    latSelected = (decimal)24.949574;
+                    lngSelected = (decimal)121.545571;
+                    break;
+                case 45:
+                    //名人鄉村小公園
+                    latSelected = (decimal)24.957607;
+                    lngSelected = (decimal)121.550053;
+                    break;
                 default:
                     break;
             }

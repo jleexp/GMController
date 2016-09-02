@@ -191,7 +191,16 @@
             "道館-濟公禪師開示",
             "道館-廣恩獅",
             "道館-竹雲寺",
-            "道館-六份仔福德宮"});
+            "道館-六份仔福德宮",
+            "道館-筆架山二格山路牌",
+            "道館-蔣公騎馬雕像",
+            "道館-大香山慈音巌",
+            "道館-被囚禁的變電箱",
+            "道館-新店福澤宮",
+            "道館-青潭竹林路口",
+            "道館-新店神召會",
+            "道館-喜如意餐廳",
+            "道館-名人鄉村小公園"});
             this.comboBox1.Location = new System.Drawing.Point(172, 46);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(130, 20);
