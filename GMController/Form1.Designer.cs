@@ -55,6 +55,7 @@
             this.checkBox2 = new System.Windows.Forms.CheckBox();
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // textBox1
@@ -133,9 +134,9 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(173, 72);
+            this.button2.Location = new System.Drawing.Point(172, 102);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.Size = new System.Drawing.Size(62, 23);
             this.button2.TabIndex = 9;
             this.button2.Text = "初始定位";
             this.button2.UseVisualStyleBackColor = true;
@@ -152,60 +153,22 @@
             // 
             // comboBox1
             // 
+            this.comboBox1.AutoCompleteCustomSource.AddRange(new string[] {
+            "景點",
+            "木柵道館",
+            "新店道館"});
+            this.comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.ItemHeight = 12;
             this.comboBox1.Items.AddRange(new object[] {
-            "我家",
-            "政大",
-            "北投公園",
-            "碧湖公園",
-            "大湖公園",
-            "逢甲公園",
-            "前港公園",
-            "青年公園",
-            "南寮漁港",
-            "信義區",
-            "道館-杏花林",
-            "道館-Overlook Deck",
-            "道館-神奇大石龜",
-            "道館-聖恩宮",
-            "道館-政大研究總中心",
-            "道館-指南茶路石碑",
-            "道館-親水文學步道",
-            "道館-指南宮天門長廊",
-            "道館-指南宮纜車站",
-            "道館-指南宮大雄寶殿",
-            "道館-兩隻小鹿",
-            "道館-樟湖步道",
-            "道館-喵嗚",
-            "道館-貓空纜車站",
-            "道館-路標",
-            "道館-茶研發推廣中心*2",
-            "道館-銀河洞*2",
-            "道館-靈山媽祖廟*2",
-            "道館-福德宮",
-            "道館-銀河土地公",
-            "道館-儒釋道",
-            "道館-茗華園牌樓",
-            "道館-福德宮天公爐",
-            "道館-濟公禪師開示",
-            "道館-廣恩獅",
-            "道館-竹雲寺",
-            "道館-六份仔福德宮",
-            "道館-筆架山二格山路牌",
-            "道館-蔣公騎馬雕像",
-            "道館-大香山慈音巌",
-            "道館-被囚禁的變電箱",
-            "道館-新店福澤宮",
-            "道館-青潭竹林路口",
-            "道館-新店神召會",
-            "道館-喜如意餐廳",
-            "道館-名人鄉村小公園"});
-            this.comboBox1.Location = new System.Drawing.Point(172, 46);
+            "景點",
+            "木柵道館",
+            "新店道館",
+            "石碇道館"});
+            this.comboBox1.Location = new System.Drawing.Point(172, 18);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(130, 20);
+            this.comboBox1.Size = new System.Drawing.Size(129, 20);
             this.comboBox1.TabIndex = 11;
-            this.comboBox1.Text = "請選擇";
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // BtnNW
@@ -310,7 +273,7 @@
             // 
             // Set1Btn
             // 
-            this.Set1Btn.Location = new System.Drawing.Point(172, 19);
+            this.Set1Btn.Location = new System.Drawing.Point(172, 74);
             this.Set1Btn.Name = "Set1Btn";
             this.Set1Btn.Size = new System.Drawing.Size(62, 23);
             this.Set1Btn.TabIndex = 22;
@@ -320,7 +283,7 @@
             // 
             // Set2Btn
             // 
-            this.Set2Btn.Location = new System.Drawing.Point(241, 19);
+            this.Set2Btn.Location = new System.Drawing.Point(240, 74);
             this.Set2Btn.Name = "Set2Btn";
             this.Set2Btn.Size = new System.Drawing.Size(61, 23);
             this.Set2Btn.TabIndex = 23;
@@ -331,7 +294,7 @@
             // checkBox2
             // 
             this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(254, 76);
+            this.checkBox2.Location = new System.Drawing.Point(240, 105);
             this.checkBox2.Name = "checkBox2";
             this.checkBox2.Size = new System.Drawing.Size(48, 16);
             this.checkBox2.TabIndex = 24;
@@ -366,11 +329,21 @@
             this.label5.TabIndex = 26;
             this.label5.Text = "間隔";
             // 
+            // comboBox3
+            // 
+            this.comboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox3.FormattingEnabled = true;
+            this.comboBox3.Location = new System.Drawing.Point(172, 48);
+            this.comboBox3.Name = "comboBox3";
+            this.comboBox3.Size = new System.Drawing.Size(130, 20);
+            this.comboBox3.TabIndex = 27;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(314, 322);
+            this.ClientSize = new System.Drawing.Size(313, 322);
+            this.Controls.Add(this.comboBox3);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.comboBox2);
             this.Controls.Add(this.checkBox2);
@@ -400,6 +373,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "Form1";
             this.Text = "GenyMotion Controller";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.Shown += new System.EventHandler(this.Form1_Shown);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -435,6 +409,7 @@
         private System.Windows.Forms.CheckBox checkBox2;
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ComboBox comboBox3;
     }
 }
 
