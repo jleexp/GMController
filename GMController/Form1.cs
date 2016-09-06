@@ -15,94 +15,198 @@ namespace GMController
     {
         Random Rnd = new Random();
         string GMShell = @"C:\Program Files\Genymobile\Genymotion\genyshell";
-        //decimal latSelected;
-        //decimal lngSelected;
-        List<GeoSpot> list_GeoGym_MZ;          //木柵道館
-        List<GeoSpot> list_GeoGym_XD;          //新店道館
-        List<GeoSpot> list_GeoGym_SD;          //石碇道館
+        List<GeoSpot> list_GeoGym_MZ;           //木柵道館
+        List<GeoSpot> list_GeoGym_XD;           //新店道館
+        List<GeoSpot> list_GeoGym_SD;           //石碇道館
         List<GeoSpot> list_GeoSpot;
+        //bool bIsAccuracy = false;               //精準定位
         public Form1()
         {
             InitializeComponent();
         }
 
-        private void MoveNorth()
+        //移動距離
+        private decimal getDistance()
         {
-            decimal lat = Convert.ToDecimal(textBox1.Text);
-            decimal move = ((decimal)100 + (decimal)Rnd.Next(99)) / (decimal)1000000;
+            decimal Distance = 0;
+            Distance = ((decimal)100 + (decimal)Rnd.Next(99)) / (decimal)1000000;
+            // Fast Mode
             if (checkBox1.Checked == true)
             {
-                move = move * 2;
+                Distance = Distance * 2;
             }
-            lat += move;
-            textBox1.Text = lat.ToString();
-            string arg = "-c \"gps setlatitude " + textBox1.Text + "\"";
+            return Distance;
+        }
+
+        //設定 GenyMotion 座標
+        private void setGPS(decimal latitude, decimal longitude)
+        {
+            string sFileName = Path.GetTempPath() + Path.GetRandomFileName().Replace(".", "");
+            string arg = "";
+            if (latitude > 0 && longitude > 0)
+            {
+                textBox1.Text = latitude.ToString();
+                textBox2.Text = longitude.ToString();
+                StreamWriter fw = new StreamWriter(sFileName);
+                fw.WriteLine("gps setlatitude " + textBox1.Text);
+                fw.WriteLine("gps setlongitude " + textBox2.Text);
+                fw.Close();
+                arg = "-f \"" + sFileName + "\"";
+            } else if (latitude > 0 && longitude == 0)
+            {
+                textBox1.Text = latitude.ToString();
+                arg = "-c \"gps setlatitude " + textBox1.Text + "\"";
+            } else if (longitude > 0 && latitude == 0)
+            {
+                textBox2.Text = longitude.ToString();
+                arg = "-c \"gps setlongitude " + textBox2.Text + "\"";
+            }
+            if (!string.IsNullOrEmpty(arg))
+            {
+                RunGMShell(arg);
+            }
+
+            if (File.Exists(sFileName))
+            {
+                File.Delete(sFileName);
+            }
+        }
+
+        //初始化定位
+        private void initGPS()
+        {
+            string sFileName = Path.GetTempPath() + Path.GetRandomFileName().Replace(".", "");
+            string arg = "";
+            
+            StreamWriter fw = new StreamWriter(sFileName);
+            fw.WriteLine("gps setstatus enabled");
+            fw.WriteLine("gps setlatitude " + textBox1.Text);
+            fw.WriteLine("gps setlongitude " + textBox2.Text);
+            fw.WriteLine("gps setaccuracy 20");
+            fw.Close();
+            arg = "-f \"" + sFileName + "\"";
+
             RunGMShell(arg);
+            
+            if (File.Exists(sFileName))
+            {
+                File.Delete(sFileName);
+            }
+        }
+
+        //執行 GenyMotion Shell
+        private void RunGMShell(string arg)
+        {
+            ProcessStartInfo pinfo = new ProcessStartInfo();
+            pinfo.FileName = GMShell;
+            pinfo.Arguments = arg;
+            pinfo.UseShellExecute = false;
+            pinfo.CreateNoWindow = true;
+            Process p = new Process();
+            p.StartInfo = pinfo;
+            p.EnableRaisingEvents = true;
+            p.Start();
+            p.WaitForExit();
+        }
+
+        private void MoveNorth()
+        {
+            decimal move = getDistance();
+            decimal lat = Convert.ToDecimal(textBox1.Text) + move;
+            setGPS(lat, 0);
         }
 
         private void MoveSouth()
         {
-            decimal lat = Convert.ToDecimal(textBox1.Text);
-            decimal move = ((decimal)100 + (decimal)Rnd.Next(99)) / (decimal)1000000;
-            if (checkBox1.Checked == true)
-            {
-                move = move * 2;
-            }
-            lat -= move;
-            textBox1.Text = lat.ToString();
-            string arg = "-c \"gps setlatitude " + textBox1.Text + "\"";
-            RunGMShell(arg);
+            decimal move = getDistance();
+            decimal lat = Convert.ToDecimal(textBox1.Text) - move;
+            setGPS(lat, 0);
         }
 
         private void MoveEast()
         {
-            decimal lng = Convert.ToDecimal(textBox2.Text);
-            decimal move = ((decimal)100 + (decimal)Rnd.Next(99)) / (decimal)1000000;
-            if (checkBox1.Checked == true)
-            {
-                move = move * 2;
-            }
-            lng += move;
-            textBox2.Text = lng.ToString();
-            string arg = "-c \"gps setlongitude " + textBox2.Text + "\"";
-            RunGMShell(arg);
+            decimal move = getDistance();
+            decimal lng = Convert.ToDecimal(textBox2.Text) + move;
+            setGPS(0, lng);
         }
 
         private void MoveWest()
         {
-            decimal lng = Convert.ToDecimal(textBox2.Text);
-            decimal move = ((decimal)100 + (decimal)Rnd.Next(99)) / (decimal)1000000;
-            if (checkBox1.Checked == true)
-            {
-                move = move * 2;
-            }
-            lng -= move;
-            textBox2.Text = lng.ToString();
-            string arg = "-c \"gps setlongitude " + textBox2.Text + "\"";
-            RunGMShell(arg);
+            decimal move = getDistance();
+            decimal lng = Convert.ToDecimal(textBox2.Text) - move;
+            setGPS(0, lng);
         }
+
+        private void MoveNorthWest()
+        {
+            decimal move = getDistance();
+            decimal lng = Convert.ToDecimal(textBox2.Text) - move;
+            decimal lat = Convert.ToDecimal(textBox1.Text) + move;
+            setGPS(lat, lng);
+        }
+
+        private void MoveSouthWest()
+        {
+            decimal move = getDistance();
+            decimal lng = Convert.ToDecimal(textBox2.Text) - move;
+            decimal lat = Convert.ToDecimal(textBox1.Text) - move;
+            setGPS(lat, lng);
+        }
+
+        private void MoveNorthEast()
+        {
+            decimal move = getDistance();
+            decimal lng = Convert.ToDecimal(textBox2.Text) + move;
+            decimal lat = Convert.ToDecimal(textBox1.Text) + move;
+            setGPS(lat, lng);
+        }
+
+        private void MoveSouthEast()
+        {
+            decimal move = getDistance();
+            decimal lng = Convert.ToDecimal(textBox2.Text) + move;
+            decimal lat = Convert.ToDecimal(textBox1.Text) - move;
+            setGPS(lat, lng);
+        }
+
         private void BtnNorth_Click(object sender, EventArgs e)
         {
             MoveNorth();
-            //textBox3.Text = "Move N done.";
         }
 
         private void BtnWest_Click(object sender, EventArgs e)
         {
             MoveWest();
-            //textBox3.Text = "Move W done.";
         }
 
         private void BtnSouth_Click(object sender, EventArgs e)
         {
             MoveSouth();
-            //textBox3.Text = "Move S done.";
         }
 
         private void BtnEast_Click(object sender, EventArgs e)
         {
             MoveEast();
-            //textBox3.Text = "Move E done.";
+        }
+
+        private void BtnNW_Click(object sender, EventArgs e)
+        {
+            MoveNorthWest();
+        }
+
+        private void BtnNE_Click(object sender, EventArgs e)
+        {
+            MoveNorthEast();
+        }
+
+        private void BtnSE_Click(object sender, EventArgs e)
+        {
+            MoveSouthEast();
+        }
+
+        private void BtnSW_Click(object sender, EventArgs e)
+        {
+            MoveSouthWest();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -118,43 +222,18 @@ namespace GMController
             }
             if (string.IsNullOrEmpty(textBox1.Text) || string.IsNullOrEmpty(textBox2.Text))
             {
-                //MessageBox.Show("請先定位座標!");
                 textBox3.Text = "請先定位座標!";
             }
             else if (checkBox2.Checked == true)
             {
-                //MessageBox.Show("已鎖定, 請先解除!");
                 textBox3.Text = "已鎖定, 請先解除!";
             }
             else
             {
-                string arg = "-c \"gps setstatus enabled\"";
-                RunGMShell(arg);
-                arg = "-c \"gps setlatitude " + textBox1.Text + "\"";
-                RunGMShell(arg);
-                arg = "-c \"gps setlongitude " + textBox2.Text + "\"";
-                RunGMShell(arg);
-                arg = "-c \"gps setaccuracy 20\"";
-                RunGMShell(arg);
+                initGPS();
                 checkBox2.Checked = true;
-                textBox3.Text = "初始化定位完成";
+                textBox3.Text = "初始定位完成";
             }
-        }
-
-        private void RunGMShell(string arg)
-        {
-            //textBox3.Text = "";
-            ProcessStartInfo pinfo = new ProcessStartInfo();
-            pinfo.FileName = GMShell;
-            pinfo.Arguments = arg;
-            pinfo.UseShellExecute = false;
-            pinfo.CreateNoWindow = true;
-            Process p = new Process();
-            p.StartInfo = pinfo;
-            p.EnableRaisingEvents = true;
-            p.Start();
-            p.WaitForExit();
-            //textBox3.Text = arg;
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -185,48 +264,21 @@ namespace GMController
             comboBox3.DisplayMember = "Name";
         }
 
-        private void BtnNW_Click(object sender, EventArgs e)
-        {
-            MoveNorth();
-            MoveWest();
-            //textBox3.Text = "Move NW done.";
-        }
-
-        private void BtnNE_Click(object sender, EventArgs e)
-        {
-            MoveNorth();
-            MoveEast();
-            //textBox3.Text = "Move NE done.";
-        }
-
-        private void BtnSE_Click(object sender, EventArgs e)
-        {
-            MoveSouth();
-            MoveEast();
-            //textBox3.Text = "Move SE done.";
-        }
-
-        private void BtnSW_Click(object sender, EventArgs e)
-        {
-            MoveSouth();
-            MoveWest();
-            //textBox3.Text = "Move SW done.";
-        }
-
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
-            decimal lat = 0;
-            decimal lng = 0;
-            decimal tlat = 0;
-            decimal tlng = 0;
+            decimal lat = 0;            //Current
+            decimal lng = 0;            //Current
+            decimal tlat = 0;           //Target
+            decimal tlng = 0;           //Target
+            decimal slat = 0;           //Set to
+            decimal slng = 0;           //Set to
+            decimal distance = 0;
             decimal diff_lat = 0;
             decimal diff_lng = 0;
             decimal diff_max = 200;
-            if (checkBox1.Checked == true)
-            {
-                //diff_max = 400;
-            }
+
             do {
+                distance = getDistance();
                 lat = Convert.ToDecimal(textBox1.Text);
                 tlat = Convert.ToDecimal(textBox4.Text);
                 diff_lat = (tlat - lat) * 1000000;
@@ -238,28 +290,45 @@ namespace GMController
                     //296251        295371
                     if (diff_lat > 0)
                     {
-                        MoveNorth();
+                        slat = lat + distance;
                     }
                     else
                     {
-                        MoveSouth();
+                        slat = lat - distance;
                     }
+                }
+                else
+                {
+                    slat = 0;
                 }
                 if (Math.Abs(diff_lng) > diff_max)
                 {
                     //518743    520430
                     if (diff_lng > 0)
                     {
-                        MoveEast();
+                        slng = lng + distance;
                     }
                     else
                     {
-                        MoveWest();
+                        slng = lng - distance;
                     }
+                }
+                else
+                {
+                    slng = 0;
+                }
+                if (slat > 0 || slng > 0)
+                {
+                    setGPS(slat, slng);
                 }
                 int SleepTime = Convert.ToInt16(comboBox2.SelectedIndex) * 1000;
                 System.Threading.Thread.Sleep(SleepTime);
-            } while ((Math.Abs(diff_lat) > diff_max || Math.Abs(diff_lng) > diff_max) && backgroundWorker1.CancellationPending == false);
+                if (backgroundWorker1.CancellationPending == true)
+                {
+                    e.Cancel = true;
+                    break;
+                }
+            } while ((Math.Abs(diff_lat) > diff_max || Math.Abs(diff_lng) > diff_max));
         }
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -270,6 +339,7 @@ namespace GMController
             }
             else
             {
+                setGPS(Convert.ToDecimal(textBox4.Text), Convert.ToDecimal(textBox5.Text));
                 textBox3.Text = "到達目的地";
             }
             BtnAuto.Text = "Start";
@@ -281,13 +351,13 @@ namespace GMController
             {
                 BtnAuto.Text = "Stop";
                 backgroundWorker1.RunWorkerAsync();
+                textBox3.Text = "自動導航開始";
             }
             else
             {
                 BtnAuto.Text = "Start";
                 backgroundWorker1.CancelAsync();
             }
-            textBox3.Text = "";
         }
 
         private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
@@ -322,7 +392,7 @@ namespace GMController
             list_GeoSpot = new List<GeoSpot>()
             {
                 new GeoSpot { Name = "政大", Latitue = (decimal)24.986457, Longitude = (decimal)121.574303 },
-                new GeoSpot { Name = "信義區", Latitue = (decimal)25.036400, Longitude = (decimal)121.567165 },
+                new GeoSpot { Name = "信義區", Latitue = (decimal)25.036401, Longitude = (decimal)121.567165 },
                 new GeoSpot { Name = "北投公園", Latitue = (decimal)25.136257, Longitude = (decimal)121.506297 },
                 new GeoSpot { Name = "碧湖公園", Latitue = (decimal)25.082187, Longitude = (decimal)121.585623 },
                 new GeoSpot { Name = "大湖公園", Latitue = (decimal)25.083320, Longitude = (decimal)121.601942 },
