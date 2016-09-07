@@ -19,7 +19,9 @@ namespace GMController
         List<GeoSpot> list_GeoGym_XD;           //新店道館
         List<GeoSpot> list_GeoGym_SD;           //石碇道館
         List<GeoSpot> list_GeoSpot;
-        //bool bIsAccuracy = false;               //精準定位
+        List<GeoSpot> list_GeoPath;             //巡航路徑
+        bool bIsPatrol = false;                 //巡航執行中
+        int iPatrolIdx = 0;
         public Form1()
         {
             InitializeComponent();
@@ -340,7 +342,26 @@ namespace GMController
             else
             {
                 setGPS(Convert.ToDecimal(textBox4.Text), Convert.ToDecimal(textBox5.Text));
-                textBox3.Text = "到達目的地";
+                if (bIsPatrol)
+                {
+                    textBox3.Text = "到達" + list_GeoPath[iPatrolIdx].Name + Environment.NewLine;
+                    iPatrolIdx++;
+                    if (iPatrolIdx == list_GeoPath.Count)
+                    {
+                        iPatrolIdx = 0;
+                    }
+                    textBox3.AppendText("下一個目的地是" + list_GeoPath[iPatrolIdx].Name);
+                    textBox4.Text = list_GeoPath[iPatrolIdx].Latitue.ToString();
+                    textBox5.Text = list_GeoPath[iPatrolIdx].Longitude.ToString();
+                    if (checkBox3.Checked == false)
+                    {
+                        BtnAuto.PerformClick();
+                    }
+                }
+                else
+                {
+                    textBox3.Text = "到達目的地";
+                }
             }
             BtnAuto.Text = "Start";
         }
@@ -351,7 +372,14 @@ namespace GMController
             {
                 BtnAuto.Text = "Stop";
                 backgroundWorker1.RunWorkerAsync();
-                textBox3.Text = "自動導航開始";
+                if (bIsPatrol)
+                {
+                    textBox3.Text = "自動巡航開始, 往" + list_GeoPath[iPatrolIdx].Name + "前進。";
+                }
+                else
+                {
+                    textBox3.Text = "自動導航開始";
+                }
             }
             else
             {
@@ -384,6 +412,8 @@ namespace GMController
             comboBox2.SelectedIndex = 2;
             comboBox1.SelectedIndex = 0;
             ComboBoxBind();
+            comboBox4.SelectedIndex = 0;
+            checkBox3.Checked = true;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -474,6 +504,89 @@ namespace GMController
         private void label6_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void BtnPath_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(textBox1.Text) || string.IsNullOrEmpty(textBox2.Text))
+            {
+                textBox3.Text = "請先定位座標!";
+                return;
+            }
+            if (bIsPatrol == false)
+            {
+                if (backgroundWorker1.IsBusy)
+                {
+                    textBox3.Text = "自動導航執行中, 請先停止導航!";
+                    return;
+                }
+                if (comboBox4.SelectedIndex == 0)
+                {
+                    list_GeoPath = new List<GeoSpot>()
+                    {
+                        new GeoSpot { Name = "蕃薯坑福德正神", Latitue = (decimal)24.958805, Longitude = (decimal)121.610064 },
+                        new GeoSpot { Name = "正襟危坐看風景", Latitue = (decimal)24.962996, Longitude = (decimal)121.624876 },
+                        new GeoSpot { Name = "筆架山二格山路牌", Latitue = (decimal)24.969655, Longitude = (decimal)121.620569 },
+                        new GeoSpot { Name = "福德宮天公爐", Latitue = (decimal)24.970275, Longitude = (decimal)121.606985 },
+                        new GeoSpot { Name = "茗華園牌樓", Latitue = (decimal)24.970426, Longitude = (decimal)121.601473 },
+                        new GeoSpot { Name = "儒釋道", Latitue = (decimal)24.972672, Longitude = (decimal)121.598248 },
+                        new GeoSpot { Name = "茶研發推廣中心*2", Latitue = (decimal)24.969249, Longitude = (decimal)121.594096 },
+                        new GeoSpot { Name = "路標", Latitue = (decimal)24.966704, Longitude = (decimal)121.589388 },
+                        new GeoSpot { Name = "喵嗚", Latitue = (decimal)24.967299, Longitude = (decimal)121.587170 },
+                        new GeoSpot { Name = "樟湖步道", Latitue = (decimal)24.965303, Longitude = (decimal)121.581481 },
+                        new GeoSpot { Name = "杏花林", Latitue = (decimal)24.969199, Longitude = (decimal)121.576663 },
+                        new GeoSpot { Name = "神奇大石龜", Latitue = (decimal)24.974221, Longitude = (decimal)121.574857 },
+                        new GeoSpot { Name = "聖恩宮", Latitue = (decimal)24.973455, Longitude = (decimal)121.569619 },
+                        new GeoSpot { Name = "兩隻小鹿", Latitue = (decimal)24.971323, Longitude = (decimal)121.567771 },
+                        new GeoSpot { Name = "政大研究總中心", Latitue = (decimal)24.979015, Longitude = (decimal)121.575183 },
+                        new GeoSpot { Name = "指南茶路石碑", Latitue = (decimal)24.979015, Longitude = (decimal)121.577195 },
+                        new GeoSpot { Name = "指南宮天門長廊", Latitue = (decimal)24.980339, Longitude = (decimal)121.587169 },
+                        new GeoSpot { Name = "指南宮大雄寶殿", Latitue = (decimal)24.978565, Longitude = (decimal)121.586923 },
+                        new GeoSpot { Name = "濟公禪師開示", Latitue = (decimal)24.978199, Longitude = (decimal)121.597492 },
+                        new GeoSpot { Name = "伴山農莊", Latitue = (decimal)24.987938, Longitude = (decimal)121.605146 },
+                        new GeoSpot { Name = "大吉嶺步道導覽圖", Latitue = (decimal)24.983498, Longitude = (decimal)121.614809 },
+                        new GeoSpot { Name = "隱修院", Latitue = (decimal)24.988574, Longitude = (decimal)121.621379 },
+                    };
+                }
+                else if (comboBox4.SelectedIndex == 1)
+                {
+                    list_GeoPath = new List<GeoSpot>()
+                    {
+                    };
+                }
+                if (list_GeoPath.Count == 0)
+                {
+                    textBox3.Text = "巡航路徑未設定!";
+                    return;
+                }
+
+                iPatrolIdx = 0;
+                decimal lat = Convert.ToDecimal(textBox1.Text);
+                decimal lng = Convert.ToDecimal(textBox2.Text);
+                for (int i = 0; i < list_GeoPath.Count; i++)
+                {
+                    if (i == iPatrolIdx) continue;
+                    decimal diff_idx = Math.Abs(list_GeoPath[iPatrolIdx].Latitue - lat) + Math.Abs(list_GeoPath[iPatrolIdx].Longitude - lng);
+                    decimal diff_new = Math.Abs(list_GeoPath[i].Latitue - lat) + Math.Abs(list_GeoPath[i].Longitude - lng);
+                    if (diff_new < diff_idx)
+                    {
+                        iPatrolIdx = i;
+                    }
+                }
+                textBox4.Text = list_GeoPath[iPatrolIdx].Latitue.ToString();
+                textBox5.Text = list_GeoPath[iPatrolIdx].Longitude.ToString();
+                bIsPatrol = true;
+                BtnPath.Text = "停止巡航";
+                BtnAuto.PerformClick();
+            }
+            else
+            {
+                bIsPatrol = false;
+                BtnPath.Text = "開始巡航";
+                list_GeoPath = new List<GeoSpot>()
+                {
+                };
+            }
         }
     }
     public class GeoSpot

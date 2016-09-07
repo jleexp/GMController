@@ -56,6 +56,9 @@
             this.comboBox2 = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.comboBox4 = new System.Windows.Forms.ComboBox();
+            this.BtnPath = new System.Windows.Forms.Button();
+            this.checkBox3 = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // textBox1
@@ -338,11 +341,46 @@
             this.comboBox3.Size = new System.Drawing.Size(130, 20);
             this.comboBox3.TabIndex = 27;
             // 
+            // comboBox4
+            // 
+            this.comboBox4.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBox4.FormattingEnabled = true;
+            this.comboBox4.Items.AddRange(new object[] {
+            "道館巡航",
+            "青年公園巡航"});
+            this.comboBox4.Location = new System.Drawing.Point(172, 138);
+            this.comboBox4.Name = "comboBox4";
+            this.comboBox4.Size = new System.Drawing.Size(129, 20);
+            this.comboBox4.TabIndex = 28;
+            // 
+            // BtnPath
+            // 
+            this.BtnPath.Location = new System.Drawing.Point(172, 166);
+            this.BtnPath.Name = "BtnPath";
+            this.BtnPath.Size = new System.Drawing.Size(62, 23);
+            this.BtnPath.TabIndex = 29;
+            this.BtnPath.Text = "開始巡航";
+            this.BtnPath.UseVisualStyleBackColor = true;
+            this.BtnPath.Click += new System.EventHandler(this.BtnPath_Click);
+            // 
+            // checkBox3
+            // 
+            this.checkBox3.AutoSize = true;
+            this.checkBox3.Location = new System.Drawing.Point(240, 171);
+            this.checkBox3.Name = "checkBox3";
+            this.checkBox3.Size = new System.Drawing.Size(48, 16);
+            this.checkBox3.TabIndex = 30;
+            this.checkBox3.Text = "停靠";
+            this.checkBox3.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(313, 322);
+            this.Controls.Add(this.checkBox3);
+            this.Controls.Add(this.BtnPath);
+            this.Controls.Add(this.comboBox4);
             this.Controls.Add(this.comboBox3);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.comboBox2);
@@ -410,6 +448,9 @@
         private System.Windows.Forms.ComboBox comboBox2;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox comboBox3;
+        private System.Windows.Forms.ComboBox comboBox4;
+        private System.Windows.Forms.Button BtnPath;
+        private System.Windows.Forms.CheckBox checkBox3;
     }
 }
 
