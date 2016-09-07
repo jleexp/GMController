@@ -425,6 +425,10 @@ namespace GMController
                 new GeoSpot { Name = "福德宮天公爐", Latitue = (decimal)24.970275, Longitude = (decimal)121.606985 },
                 new GeoSpot { Name = "濟公禪師開示", Latitue = (decimal)24.978199, Longitude = (decimal)121.597492 },
                 new GeoSpot { Name = "蔣公騎馬雕像", Latitue = (decimal)24.980059, Longitude = (decimal)121.569471 },
+                new GeoSpot { Name = "隱修院", Latitue = (decimal)24.988574, Longitude = (decimal)121.621379 },
+                new GeoSpot { Name = "大吉嶺步道導覽圖", Latitue = (decimal)24.983498, Longitude = (decimal)121.614809 },
+                new GeoSpot { Name = "伴山農莊", Latitue = (decimal)24.987938, Longitude = (decimal)121.605146 },
+
             };
             //設定新店道館
             list_GeoGym_XD = new List<GeoSpot>()
