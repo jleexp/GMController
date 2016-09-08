@@ -322,9 +322,9 @@ namespace GMController
                 if (slat > 0 || slng > 0)
                 {
                     setGPS(slat, slng);
+                    int SleepTime = Convert.ToInt16(comboBox2.SelectedIndex) * 1000;
+                    System.Threading.Thread.Sleep(SleepTime);
                 }
-                int SleepTime = Convert.ToInt16(comboBox2.SelectedIndex) * 1000;
-                System.Threading.Thread.Sleep(SleepTime);
                 if (backgroundWorker1.CancellationPending == true)
                 {
                     e.Cancel = true;
@@ -356,6 +356,7 @@ namespace GMController
                     if (checkBox3.Checked == false)
                     {
                         BtnAuto.PerformClick();
+                        return;
                     }
                 }
                 else
@@ -368,6 +369,11 @@ namespace GMController
 
         private void BtnAuto_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(textBox4.Text) || string.IsNullOrEmpty(textBox5.Text))
+            {
+                textBox3.Text = "請先設定導航目標!";
+                return;
+            }
             if (backgroundWorker1.IsBusy != true)
             {
                 BtnAuto.Text = "Stop";
@@ -552,6 +558,34 @@ namespace GMController
                 {
                     list_GeoPath = new List<GeoSpot>()
                     {
+                        new GeoSpot { Name = "羅馬廣場01", Latitue = (decimal)24.986283, Longitude = (decimal)121.574129 },
+                        new GeoSpot { Name = "羅馬廣場02", Latitue = (decimal)24.986114, Longitude = (decimal)121.573836 },
+                        new GeoSpot { Name = "田徑場", Latitue = (decimal)24.985261, Longitude = (decimal)121.574363 },
+                        new GeoSpot { Name = "八角亭", Latitue = (decimal)24.985478, Longitude = (decimal)121.574907 },
+                        new GeoSpot { Name = "行政大樓", Latitue = (decimal)24.986731, Longitude = (decimal)121.575549 },
+                        new GeoSpot { Name = "志希樓", Latitue = (decimal)24.986616, Longitude = (decimal)121.576200 },
+                        new GeoSpot { Name = "中正圖書館", Latitue = (decimal)24.986394, Longitude = (decimal)121.576939 },
+                        new GeoSpot { Name = "憩賢樓", Latitue = (decimal)24.985857, Longitude = (decimal)121.577226 },
+                        new GeoSpot { Name = "北政國中", Latitue = (decimal)24.985112, Longitude = (decimal)121.578682 },
+                        new GeoSpot { Name = "教育學院", Latitue = (decimal)24.985782, Longitude = (decimal)121.578682 },
+                        new GeoSpot { Name = "六然居", Latitue = (decimal)24.985782, Longitude = (decimal)121.579598 },
+                        new GeoSpot { Name = "澄館", Latitue = (decimal)24.984814, Longitude = (decimal)121.579740 },
+                        new GeoSpot { Name = "和墅", Latitue = (decimal)24.985311, Longitude = (decimal)121.582058 },
+                        new GeoSpot { Name = "山坡", Latitue = (decimal)24.985579, Longitude = (decimal)121.582452 },
+                        new GeoSpot { Name = "政大藝境", Latitue = (decimal)24.986344, Longitude = (decimal)121.583481 },
+                        new GeoSpot { Name = "日出大地", Latitue = (decimal)24.987140, Longitude = (decimal)121.583647 },
+                        new GeoSpot { Name = "政大附中後門", Latitue = (decimal)24.988062, Longitude = (decimal)121.584039 },
+                        new GeoSpot { Name = "政大附中", Latitue = (decimal)24.987473, Longitude = (decimal)121.585101 },
+                        new GeoSpot { Name = "政大附中校門", Latitue = (decimal)24.987473, Longitude = (decimal)121.585782 },
+                        new GeoSpot { Name = "綠野山莊", Latitue = (decimal)24.987104, Longitude = (decimal)121.587527 },
+                        new GeoSpot { Name = "Zoo藝術裝置", Latitue = (decimal)24.989908, Longitude = (decimal)121.586286 },
+                        new GeoSpot { Name = "夏木漱石", Latitue = (decimal)24.989437, Longitude = (decimal)121.584692 },
+                        new GeoSpot { Name = "醇心找茶", Latitue = (decimal)24.989072, Longitude = (decimal)121.578729 },
+                        new GeoSpot { Name = "萬興", Latitue = (decimal)24.989130, Longitude = (decimal)121.577019 },
+                        new GeoSpot { Name = "名人錄", Latitue = (decimal)24.989130, Longitude = (decimal)121.575852 },
+                        new GeoSpot { Name = "奇異果", Latitue = (decimal)24.989285, Longitude = (decimal)121.575188 },
+                        new GeoSpot { Name = "麥側", Latitue = (decimal)24.988001, Longitude = (decimal)121.575006 },
+                        new GeoSpot { Name = "政大書城", Latitue = (decimal)24.987350, Longitude = (decimal)121.574680 },
                     };
                 }
                 if (list_GeoPath.Count == 0)
@@ -587,6 +621,30 @@ namespace GMController
                 {
                 };
             }
+        }
+
+        private void BtnPrev_Click(object sender, EventArgs e)
+        {
+            iPatrolIdx--;
+            if (iPatrolIdx < 0)
+            {
+                iPatrolIdx = (list_GeoPath.Count-1);
+            }
+            textBox3.Text = "變更目的地前往" + list_GeoPath[iPatrolIdx].Name;
+            textBox4.Text = list_GeoPath[iPatrolIdx].Latitue.ToString();
+            textBox5.Text = list_GeoPath[iPatrolIdx].Longitude.ToString();
+        }
+
+        private void BtnNext_Click(object sender, EventArgs e)
+        {
+            iPatrolIdx++;
+            if (iPatrolIdx == list_GeoPath.Count)
+            {
+                iPatrolIdx = 0;
+            }
+            textBox3.Text = "變更目的地前往" + list_GeoPath[iPatrolIdx].Name;
+            textBox4.Text = list_GeoPath[iPatrolIdx].Latitue.ToString();
+            textBox5.Text = list_GeoPath[iPatrolIdx].Longitude.ToString();
         }
     }
     public class GeoSpot

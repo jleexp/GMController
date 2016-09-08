@@ -59,6 +59,8 @@
             this.comboBox4 = new System.Windows.Forms.ComboBox();
             this.BtnPath = new System.Windows.Forms.Button();
             this.checkBox3 = new System.Windows.Forms.CheckBox();
+            this.BtnPrev = new System.Windows.Forms.Button();
+            this.BtnNext = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // textBox1
@@ -347,7 +349,7 @@
             this.comboBox4.FormattingEnabled = true;
             this.comboBox4.Items.AddRange(new object[] {
             "道館巡航",
-            "青年公園巡航"});
+            "政大補給巡航"});
             this.comboBox4.Location = new System.Drawing.Point(172, 138);
             this.comboBox4.Name = "comboBox4";
             this.comboBox4.Size = new System.Drawing.Size(129, 20);
@@ -373,11 +375,33 @@
             this.checkBox3.Text = "停靠";
             this.checkBox3.UseVisualStyleBackColor = true;
             // 
+            // BtnPrev
+            // 
+            this.BtnPrev.Location = new System.Drawing.Point(172, 196);
+            this.BtnPrev.Name = "BtnPrev";
+            this.BtnPrev.Size = new System.Drawing.Size(62, 23);
+            this.BtnPrev.TabIndex = 31;
+            this.BtnPrev.Text = "前一目標";
+            this.BtnPrev.UseVisualStyleBackColor = true;
+            this.BtnPrev.Click += new System.EventHandler(this.BtnPrev_Click);
+            // 
+            // BtnNext
+            // 
+            this.BtnNext.Location = new System.Drawing.Point(240, 196);
+            this.BtnNext.Name = "BtnNext";
+            this.BtnNext.Size = new System.Drawing.Size(61, 23);
+            this.BtnNext.TabIndex = 32;
+            this.BtnNext.Text = "下一目標";
+            this.BtnNext.UseVisualStyleBackColor = true;
+            this.BtnNext.Click += new System.EventHandler(this.BtnNext_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(313, 322);
+            this.Controls.Add(this.BtnNext);
+            this.Controls.Add(this.BtnPrev);
             this.Controls.Add(this.checkBox3);
             this.Controls.Add(this.BtnPath);
             this.Controls.Add(this.comboBox4);
@@ -451,6 +475,8 @@
         private System.Windows.Forms.ComboBox comboBox4;
         private System.Windows.Forms.Button BtnPath;
         private System.Windows.Forms.CheckBox checkBox3;
+        private System.Windows.Forms.Button BtnPrev;
+        private System.Windows.Forms.Button BtnNext;
     }
 }
 
