@@ -349,7 +349,8 @@
             this.comboBox4.FormattingEnabled = true;
             this.comboBox4.Items.AddRange(new object[] {
             "道館巡航",
-            "政大補給巡航"});
+            "政大補給巡航",
+            "北投公園巡航"});
             this.comboBox4.Location = new System.Drawing.Point(172, 138);
             this.comboBox4.Name = "comboBox4";
             this.comboBox4.Size = new System.Drawing.Size(129, 20);
