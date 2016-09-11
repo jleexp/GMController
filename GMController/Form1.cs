@@ -534,6 +534,10 @@ namespace GMController
                         new GeoSpot { Name = "二格公園", Latitue = (decimal)24.957894, Longitude = (decimal)121.623222 },
                         new GeoSpot { Name = "正襟危坐看風景", Latitue = (decimal)24.962996, Longitude = (decimal)121.624876 },
                         new GeoSpot { Name = "筆架山二格山路牌", Latitue = (decimal)24.969655, Longitude = (decimal)121.620569 },
+                        new GeoSpot { Name = "隱修院", Latitue = (decimal)24.988574, Longitude = (decimal)121.621379 },
+                        new GeoSpot { Name = "大吉嶺步道導覽圖", Latitue = (decimal)24.983498, Longitude = (decimal)121.614809 },
+                        new GeoSpot { Name = "伴山農莊", Latitue = (decimal)24.987938, Longitude = (decimal)121.605146 },
+                        new GeoSpot { Name = "濟公禪師開示", Latitue = (decimal)24.978199, Longitude = (decimal)121.597492 },
                         new GeoSpot { Name = "福德宮天公爐", Latitue = (decimal)24.970275, Longitude = (decimal)121.606985 },
                         new GeoSpot { Name = "茗華園牌樓", Latitue = (decimal)24.970426, Longitude = (decimal)121.601473 },
                         new GeoSpot { Name = "儒釋道", Latitue = (decimal)24.972672, Longitude = (decimal)121.598248 },
@@ -549,10 +553,6 @@ namespace GMController
                         new GeoSpot { Name = "指南茶路石碑", Latitue = (decimal)24.979015, Longitude = (decimal)121.577195 },
                         new GeoSpot { Name = "指南宮天門長廊", Latitue = (decimal)24.980339, Longitude = (decimal)121.587169 },
                         new GeoSpot { Name = "指南宮大雄寶殿", Latitue = (decimal)24.978565, Longitude = (decimal)121.586923 },
-                        new GeoSpot { Name = "濟公禪師開示", Latitue = (decimal)24.978199, Longitude = (decimal)121.597492 },
-                        new GeoSpot { Name = "伴山農莊", Latitue = (decimal)24.987938, Longitude = (decimal)121.605146 },
-                        new GeoSpot { Name = "大吉嶺步道導覽圖", Latitue = (decimal)24.983498, Longitude = (decimal)121.614809 },
-                        new GeoSpot { Name = "隱修院", Latitue = (decimal)24.988574, Longitude = (decimal)121.621379 },
                     };
                 }
                 else if (comboBox4.SelectedIndex == 1)
@@ -645,18 +645,16 @@ namespace GMController
                     {
                         new GeoSpot { Name = "旅遊服務中心", Latitue = (decimal)24.849422, Longitude = (decimal)120.928641 },
                         new GeoSpot { Name = "俄式鐘樓2", Latitue = (decimal)24.850101, Longitude = (decimal)120.929320 },
-                        new GeoSpot { Name = "和平鐘", Latitue = (decimal)24.850750, Longitude = (decimal)120.929116 },
+                        new GeoSpot { Name = "和平鐘", Latitue = (decimal)24.850634, Longitude = (decimal)120.929340 },
                         new GeoSpot { Name = "俄式鐘樓3", Latitue = (decimal)24.850361, Longitude = (decimal)120.930044 },
                         new GeoSpot { Name = "彩虹橋", Latitue = (decimal)24.849123, Longitude = (decimal)120.930629 },
-                        new GeoSpot { Name = "木馬病毒", Latitue = (decimal)24.847417, Longitude = (decimal)120.930303 },
+                        new GeoSpot { Name = "木馬病毒", Latitue = (decimal)24.847693, Longitude = (decimal)120.930134 },
                         new GeoSpot { Name = "海之女神", Latitue = (decimal)24.848098, Longitude = (decimal)120.929479 },
                         new GeoSpot { Name = "地中海一號", Latitue = (decimal)24.848695, Longitude = (decimal)120.929583 },
                         new GeoSpot { Name = "三山國王", Latitue = (decimal)24.848098, Longitude = (decimal)120.928889 },
                         new GeoSpot { Name = "大水塔", Latitue = (decimal)24.848722, Longitude = (decimal)120.928889 },
                         new GeoSpot { Name = "俄式鐘樓1", Latitue = (decimal)24.849130, Longitude = (decimal)120.928333 },
-
                         new GeoSpot { Name = "貝殼公園", Latitue = (decimal)24.850435, Longitude = (decimal)120.928303 },
-                        /*
                         new GeoSpot { Name = "瑪莎咖啡", Latitue = (decimal)24.849782, Longitude = (decimal)120.927167 },
                         new GeoSpot { Name = "風箏要扯一下", Latitue = (decimal)24.849782, Longitude = (decimal)120.926343 },
                         new GeoSpot { Name = "雙人合唱螺", Latitue = (decimal)24.850152, Longitude = (decimal)120.925087 },
@@ -665,7 +663,13 @@ namespace GMController
                         new GeoSpot { Name = "龍蝦洞", Latitue = (decimal)24.848409, Longitude = (decimal)120.925255 },
                         new GeoSpot { Name = "石螃蟹", Latitue = (decimal)24.846849, Longitude = (decimal)120.925699 },
                         new GeoSpot { Name = "環保公園", Latitue = (decimal)24.846363, Longitude = (decimal)120.926645 },
-                        */
+
+                        new GeoSpot { Name = "木馬病毒", Latitue = (decimal)24.847693, Longitude = (decimal)120.930134 },
+                        new GeoSpot { Name = "海之女神", Latitue = (decimal)24.848098, Longitude = (decimal)120.929479 },
+                        new GeoSpot { Name = "地中海一號", Latitue = (decimal)24.848695, Longitude = (decimal)120.929583 },
+                        new GeoSpot { Name = "三山國王", Latitue = (decimal)24.848098, Longitude = (decimal)120.928889 },
+                        new GeoSpot { Name = "大水塔", Latitue = (decimal)24.848722, Longitude = (decimal)120.928889 },
+                        new GeoSpot { Name = "俄式鐘樓1", Latitue = (decimal)24.849130, Longitude = (decimal)120.928333 },
                     };
                 }
                 if (list_GeoPath.Count == 0)
