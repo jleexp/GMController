@@ -602,6 +602,7 @@ namespace GMController
                         new GeoSpot { Name = "凱達格蘭壁畫", Latitue = (decimal)25.136922, Longitude = (decimal)121.506268 },
                         new GeoSpot { Name = "Lotus Box", Latitue = (decimal)25.136795, Longitude = (decimal)121.504822 },
                         new GeoSpot { Name = "捷運新北投站", Latitue = (decimal)25.136774, Longitude = (decimal)121.503523 },
+                        new GeoSpot { Name = "Global Box", Latitue = (decimal)25.136088, Longitude = (decimal)121.503337 },
                         new GeoSpot { Name = "北投地標", Latitue = (decimal)25.136185, Longitude = (decimal)121.504212 },
                         new GeoSpot { Name = "櫻花變電箱", Latitue = (decimal)25.136013, Longitude = (decimal)121.505131 },
                         new GeoSpot { Name = "綠園裝飾品", Latitue = (decimal)25.135584, Longitude = (decimal)121.505784 },
